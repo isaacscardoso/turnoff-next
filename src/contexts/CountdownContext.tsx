@@ -9,8 +9,9 @@ interface CountdownContextData {
     isActive: boolean;
     startCountdown: () => void;
     resetCountdown: () => void;
-    confirmCancelCountdown: () => void;
-    closeConfirmCancelCountdownModal: () => void;
+    cancelCountdown: () => void;
+    boxCancelCountdown: () => void;
+    closeBoxCancelCountdownModal: () => void;
 }
 
 interface CountdownProviderProps {
@@ -31,7 +32,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
 
-    const [isConfirmCancelCountdownModalOpen, setConfirmCancelCountdownModalOpen] = useState(false);
+    const [isBoxCancelCountdownModalOpen, setBoxCancelCountdownModalOpen] = useState(false);
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -45,16 +46,20 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setIsActive(false);
         setTime(minutesRemaining);
         setHasFinished(false);
-        closeConfirmCancelCountdownModal();
     }
 
-    function confirmCancelCountdown() {
-        setConfirmCancelCountdownModalOpen(true);
-    }
-
-    function closeConfirmCancelCountdownModal() {
-        setConfirmCancelCountdownModalOpen(false);
+    function cancelCountdown() {
+        resetCountdown();
         resetChallenge();
+        closeBoxCancelCountdownModal();
+    }
+
+    function boxCancelCountdown() {
+        setBoxCancelCountdownModalOpen(true);
+    }
+
+    function closeBoxCancelCountdownModal() {
+        setBoxCancelCountdownModalOpen(false);
     }
 
     useEffect(() => {
@@ -78,13 +83,14 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
                 isActive,
                 startCountdown,
                 resetCountdown,
-                confirmCancelCountdown,
-                closeConfirmCancelCountdownModal
+                cancelCountdown,
+                boxCancelCountdown,
+                closeBoxCancelCountdownModal
             }}
         >
             {children}
 
-            { isConfirmCancelCountdownModalOpen && <ConfirmCancelCountdownModal />}
+            { isBoxCancelCountdownModalOpen && <ConfirmCancelCountdownModal />}
         </CountdownContext.Provider>
     )
 }
