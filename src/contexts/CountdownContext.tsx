@@ -23,6 +23,7 @@ let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
     const { startNewChallenge } = useContext(ChallengesContext);
+    const { resetChallenge } = useContext(ChallengesContext);
 
     const minutesRemaining : number = 0.05 * 60;
     
@@ -53,6 +54,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
     function closeConfirmCancelCountdownModal() {
         setConfirmCancelCountdownModalOpen(false);
+        resetChallenge();
     }
 
     useEffect(() => {

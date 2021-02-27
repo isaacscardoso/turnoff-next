@@ -5,7 +5,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,22 +21,31 @@
     position: relative;
 }
 
-.container header {
-    font-size: 8.75rem;
-    font-weight: 600;
+.containerConfirmCancelCountdown header {
     color: var(--blue);
-    background-size: contain;
-}
-
-.container strong {
-    font-size: 2.25rem;
-    color: var(--title);
-}
-
-.container p {
+    font-weight: 600;
     font-size: 1.25rem;
-    color: var(--text);
-    margin-top: 0.25rem;
+    padding: 0 2rem 1.5rem;
+    border-bottom: 1px solid var(--gray-line);
+}
+
+.containerConfirmCancelCountdown footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.containerConfirmCancelCountdown footer button {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: filter 0.2s;
 }
 
 footer button.cancelCountdown {
@@ -46,4 +54,8 @@ footer button.cancelCountdown {
 
 footer button.continueCountdown {
     background: var(--green);
+}
+
+.containerConfirmCancelCountdown footer button:hover {
+    filter: brightness(0.9);
 }
